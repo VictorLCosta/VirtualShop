@@ -4,9 +4,9 @@ namespace VirtualShop.Controllers
 {
     public class ProductController : Controller
     {
-        public ActionResult Visualizar()
+        public ActionResult Visualize()
         {
-            return new ContentResult() {Content = "<h1>Visualizar</h1>", ContentType = "text/html"};
+            return View();
         }
     }
 }
