@@ -60,7 +60,7 @@ namespace VirtualShop
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Product}/{action=Visualize}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
             
         }
