@@ -54,12 +54,15 @@ namespace VirtualShop
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            // https://www.company.com/Produto/Visualizar/10
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Product}/{action=Visualizar}/{id?}");
             });
+            
         }
     }
 }
