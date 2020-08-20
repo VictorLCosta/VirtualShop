@@ -13,5 +13,23 @@ namespace VirtualShop.Controllers
         {
             return View();
         }
+
+        public IActionResult Login()
+        {
+          //TODO: Implement Realistic Implementation
+          return View();
+        }
+
+        public IActionResult CostumerRegister()
+        {
+          //TODO: Implement Realistic Implementation
+          return View();
+        }
+
+        public IActionResult ShoppingCart()
+        {
+          //TODO: Implement Realistic Implementation
+          return View();
+        }
     }
 }
