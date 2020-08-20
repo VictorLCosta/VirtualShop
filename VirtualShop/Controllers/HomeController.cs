@@ -9,6 +9,16 @@ namespace VirtualShop.Controllers
             return View();
         }
 
+        public IActionResult ContactAction()
+        {
+            string name = HttpContext.Request.Form["name"];
+            string email = HttpContext.Request.Form["email"];
+            string text = HttpContext.Request.Form["text"];
+
+            return new ContentResult() { Content = string.Format($"Dados recebidos com sucesso! Nome: {name}, Email: {email}, Text: {text}"),
+                                          ContentType = "text/hmtl"};
+        }
+
         public IActionResult Contact()
         {
             return View();
