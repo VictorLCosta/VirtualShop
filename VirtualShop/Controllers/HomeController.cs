@@ -1,3 +1,5 @@
+using VirtualShop.Libraries.Email;
+using VirtualShop.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VirtualShop.Controllers
@@ -11,11 +13,15 @@ namespace VirtualShop.Controllers
 
         public IActionResult ContactAction()
         {
-            string name = HttpContext.Request.Form["name"];
-            string email = HttpContext.Request.Form["email"];
-            string text = HttpContext.Request.Form["text"];
+            Contact contact = new Contact();
 
-            return new ContentResult() { Content = string.Format($"Dados recebidos com sucesso! Nome: {name}, Email: {email}, Text: {text}"),
+            contact.Name = HttpContext.Request.Form["name"];
+            contact.Email = HttpContext.Request.Form["email"];
+            contact.Text = HttpContext.Request.Form["text"];
+
+            EmailContact.SendContactByEmail(contact);
+            
+            return new ContentResult() { Content = string.Format($"Dados recebidos com sucesso! Nome: {contact.Name}, Email: {contact.Email}, Text: {contact.Text}"),
                                           ContentType = "text/hmtl"};
         }
 
