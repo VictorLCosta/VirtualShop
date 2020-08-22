@@ -20,9 +20,10 @@ namespace VirtualShop.Controllers
             contact.Text = HttpContext.Request.Form["text"];
 
             EmailContact.SendContactByEmail(contact);
-            
-            return new ContentResult() { Content = string.Format($"Dados recebidos com sucesso! Nome: {contact.Name}, Email: {contact.Email}, Text: {contact.Text}"),
-                                          ContentType = "text/hmtl"};
+
+            ViewData["MSG_S"] = "Email enviado com sucesso!";
+
+            return View("Contact");
         }
 
         public IActionResult Contact()
