@@ -40,6 +40,9 @@
                                 @if (ViewData["MSG_S"] != null){
                                     <p class="alert alert-success">@ViewData["MSG_S"]</p>
                                 }
+                                @if (ViewData["MSG_E"] != null){
+                                    <p class="alert alert-danger">@ViewData["MSG_E"]</p>
+                                }
 
                                 <form role="form" method="post" action="/Home/ContactAction">
                                     <div class="form-group">

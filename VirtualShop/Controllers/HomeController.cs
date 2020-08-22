@@ -1,6 +1,7 @@
 using VirtualShop.Libraries.Email;
 using VirtualShop.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace VirtualShop.Controllers
 {
@@ -13,15 +14,22 @@ namespace VirtualShop.Controllers
 
         public IActionResult ContactAction()
         {
-            Contact contact = new Contact();
+            try
+            {
+                Contact contact = new Contact();
 
-            contact.Name = HttpContext.Request.Form["name"];
-            contact.Email = HttpContext.Request.Form["email"];
-            contact.Text = HttpContext.Request.Form["text"];
+                contact.Name = HttpContext.Request.Form["name"];
+                contact.Email = HttpContext.Request.Form["email"];
+                contact.Text = HttpContext.Request.Form["text"];
 
-            EmailContact.SendContactByEmail(contact);
+                EmailContact.SendContactByEmail(contact);
 
-            ViewData["MSG_S"] = "Email enviado com sucesso!";
+                ViewData["MSG_S"] = "Email enviado com sucesso!";
+
+            } catch(Exception e)
+            {
+                ViewData["MSG_E"] = "Ops! Ocorreu um erro, tente novamente mais tarde";
+            }
 
             return View("Contact");
         }
