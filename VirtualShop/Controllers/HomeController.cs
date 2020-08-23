@@ -2,6 +2,9 @@ using VirtualShop.Libraries.Email;
 using VirtualShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Text;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace VirtualShop.Controllers
 {
@@ -22,9 +25,26 @@ namespace VirtualShop.Controllers
                 contact.Email = HttpContext.Request.Form["email"];
                 contact.Text = HttpContext.Request.Form["text"];
 
-                EmailContact.SendContactByEmail(contact);
+                var messageList = new List<ValidationResult>();
+                var context = new ValidationContext(contact);
+                bool isValid = Validator.TryValidateObject(contact, context, messageList, true);
 
-                ViewData["MSG_S"] = "Email enviado com sucesso!";
+                if(isValid == true)
+                {
+                    EmailContact.SendContactByEmail(contact);
+
+                    ViewData["MSG_S"] = "Email enviado com sucesso!";
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var text in messageList)
+                    {
+                        sb.Append(text.ErrorMessage);
+
+                        ViewData["MSG_E"] = sb.ToString();
+                    }
+                }
 
             } catch(Exception e)
             {

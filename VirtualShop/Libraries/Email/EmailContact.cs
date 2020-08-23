@@ -15,6 +15,7 @@ namespace VirtualShop.Libraries.Email
             smtp.Credentials = new NetworkCredential("sandmanfunky@gmail.com", "OveryFucker0435"); //cria novas credencias e seleciona o email que realizara os envios
             smtp.EnableSsl = true; //habilita segurança
             
+            //Mensagem do corpo do email
             string Bodymsg = string.Format("<h2>Contato - Loja Virtual</h2>"
                         + "<b>Nome: </b>{0} <br/>"
                         + "<b>Email: </b>{1} <br/>"
@@ -22,7 +23,7 @@ namespace VirtualShop.Libraries.Email
                         + "<br/> E-mail enviado automaticamente do site Loja Virtual",
                         contact.Name,
                         contact.Email,
-                        contact.Text); //Mensagem do corpo do email
+                        contact.Text); 
 
             /*Construindo a msg de envio*/
             MailMessage message = new MailMessage();
