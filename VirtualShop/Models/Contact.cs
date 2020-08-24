@@ -5,17 +5,18 @@ namespace VirtualShop.Models
     public class Contact
     {
         // NOME
-        [Required(ErrorMessage = "Preencha o campo do {0}")]
-        [MinLength(4)]
+        [Required(ErrorMessage = "O campo Nome é obrigatório")]
+        [MinLength(4, ErrorMessage = "O mínimo de caracteres exigidos é 4")]
         public string Name { get; set; }
 
         // EMAIL
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "O campo Email é obrigatório")]
+        [EmailAddress(ErrorMessage = "O texto informado não é um e-mail")]
         public string Email { get; set; }
 
         // TEXT
-        [Required]
+        [Required(ErrorMessage = "O campo Texto é obrigatório")]
+        [MinLength(200, ErrorMessage = "Digite pelo menos 200 caracteres")]
         [MaxLength(2000)]
         public string Text { get; set; }
 

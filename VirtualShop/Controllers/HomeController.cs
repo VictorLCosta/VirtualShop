@@ -40,9 +40,10 @@ namespace VirtualShop.Controllers
                     StringBuilder sb = new StringBuilder();
                     foreach (var text in messageList)
                     {
-                        sb.Append(text.ErrorMessage);
+                        sb.Append(text.ErrorMessage + "<br/>");
 
                         ViewData["MSG_E"] = sb.ToString();
+                        ViewData["CONTACT"] = contact;
                     }
                 }
 

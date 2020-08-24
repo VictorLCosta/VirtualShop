@@ -1,5 +1,6 @@
 @{
     ViewData["Title"] = "Contact";
+    VirtualShop.Models.Contact contato = (VirtualShop.Models.Contact)ViewData["CONTACT"];
 }
 
 <main role="main">
@@ -41,7 +42,7 @@
                                     <p class="alert alert-success">@ViewData["MSG_S"]</p>
                                 }
                                 @if (ViewData["MSG_E"] != null){
-                                    <p class="alert alert-danger">@ViewData["MSG_E"]</p>
+                                    <p class="alert alert-danger">@Html.Raw(ViewData["MSG_E"])</p>
                                 }
 
                                 <form role="form" method="post" action="/Home/ContactAction">
@@ -52,7 +53,7 @@
                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                             </div>
                                             <input type="text" id="name" class="form-control" name="name" placeholder=""
-                                                required="">
+                                                required="" value="@(contato != null ? contato.Name: "")">
                                         </div> 
                                     </div> 
 
@@ -62,7 +63,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fa fa-at"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" name="email" id="email" placeholder="">
+                                            <input type="text" class="form-control" name="email" id="email" placeholder=""
+                                                value="@(contato != null ? contato.Email: "")">
                                         </div> 
                                     </div> 
 
@@ -71,7 +73,7 @@
                                             <div class="form-group">
                                                 <label for="text"><span class="hidden-xs">Texto</span> </label>
                                                 <div class="form-inline">
-                                                    <textarea class="form-control" name="text" id="text" style="width:100%"></textarea>
+                                                    <textarea class="form-control" name="text" id="text" style="width:100%" >@(contato != null ? contato.Email: "")</textarea>
 
                                                 </div>
                                             </div>
