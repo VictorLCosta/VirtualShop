@@ -1,3 +1,4 @@
+@model VirtualShop.Models.Contact
 @{
     ViewData["Title"] = "Index";
 }
@@ -159,3 +160,27 @@
         </div>
 
     </main>
+
+@using (Html.BeginForm("index", "home", FormMethod.Post))
+{
+<div class="row">
+    <div class="col-sm-6 offset-sm-3">
+    <form role="form" method="post" action="/Home/ContactAction">
+        
+        <div class="form-group">
+            <label for="email">Cadastre seu E-mail para receber promoções:</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-at"></i></span>
+                </div>
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class="form-control" } })
+            </div>
+        </div>
+
+        <br />
+        <button class="subscribe btn btn-primary btn-block" type="submit"> Enviar </button>
+        
+    </form>
+    </div>
+</div>
+}

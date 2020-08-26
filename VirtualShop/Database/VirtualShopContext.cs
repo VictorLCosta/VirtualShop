@@ -12,6 +12,7 @@ namespace VirtualShop.Database
         }
 
         public DbSet<Client> Clients { get; set; }
+        public DbSet<NewsletterEmail> NewsletterEmails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
