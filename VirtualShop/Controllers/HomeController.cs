@@ -19,7 +19,15 @@ namespace VirtualShop.Controllers
         [HttpPost]
         public IActionResult Index([FromForm]NewsletterEmail news) 
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                //TODO - adiçao no banco de dados
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult ContactAction()
