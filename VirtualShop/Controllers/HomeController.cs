@@ -3,13 +3,22 @@ using VirtualShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using VirtualShop.Database;
 
 namespace VirtualShop.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly VirtualShopContext _context;
+
+        public HomeController(VirtualShopContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -17,11 +26,14 @@ namespace VirtualShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index([FromForm]NewsletterEmail news) 
+        public async Task<IActionResult> Index([FromForm]NewsletterEmail news) 
         {
             if (ModelState.IsValid)
             {
-                //TODO - adiçao no banco de dados
+                await _context.NewsletterEmails.AddAsync(news);
+                await _context.SaveChangesAsync();
+                TempData["MSG_S"] = "E-mail cadastrado! Agora você vai receber promoções especiais no seu email! Fique atento";
+
                 return RedirectToAction(nameof(Index));
             }
             else

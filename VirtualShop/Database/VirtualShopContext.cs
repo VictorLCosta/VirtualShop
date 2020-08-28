@@ -23,6 +23,14 @@ namespace VirtualShop.Database
             mb.Entity<Client>()
                 .Property(c => c.CPF)
                 .IsRequired();
+
+            // PROPRIEDADES DA NEWSLETTER ---------------------
+            mb.Entity<NewsletterEmail>()
+                .ToTable("Newsletter");
+
+            mb.Entity<NewsletterEmail>()
+                .HasIndex(nw => nw.Email)
+                .IsUnique();
                 
         }
     }
