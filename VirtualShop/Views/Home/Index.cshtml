@@ -161,10 +161,11 @@
 
 </main>
 
-@using (Html.BeginForm("index", "home", FormMethod.Post))
+
+@using (Html.BeginForm(null, null, null, FormMethod.Post, false, new { @action = Url.Action("index", "home") + "#formulario" }))
 {
 
-    <div class="container">
+    <div class="container" id="formulario">
         <div class="row">
             <div class="col-sm-6 offset-sm-2">
                 @if (TempData["MSG_S"] != null)
