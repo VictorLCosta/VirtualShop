@@ -93,10 +93,17 @@ namespace VirtualShop.Controllers
           return View();
         }
 
+        [HttpGet]
         public IActionResult CostumerRegister()
         {
           //TODO: Implement Realistic Implementation
           return View();
+        }
+
+        [HttpPost]
+        public IActionResult CostumerRegister([FromForm] Client client) 
+        {
+            return RedirectToAction(nameof(Login));
         }
 
         public IActionResult ShoppingCart()

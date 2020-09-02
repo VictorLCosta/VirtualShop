@@ -24,6 +24,8 @@ namespace VirtualShop.Database
                 .Property(c => c.CPF)
                 .IsRequired();
 
+
+
             // PROPRIEDADES DA NEWSLETTER ---------------------
             mb.Entity<NewsletterEmail>()
                 .ToTable("Newsletter");
