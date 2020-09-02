@@ -101,9 +101,18 @@ namespace VirtualShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult CostumerRegister([FromForm] Client client) 
+        public async Task<IActionResult> CostumerRegister([FromForm] Client client) 
         {
-            return RedirectToAction(nameof(Login));
+            if (ModelState.IsValid) 
+            {
+                await _context.Clients.AddAsync(client);
+                await _context.SaveChangesAsync();
+
+                TempData["MSG_S"] = "Cadastro realizado com sucesso!";
+
+                return RedirectToAction(nameof(CostumerRegister));
+            }
+            return View();
         }
 
         public IActionResult ShoppingCart()

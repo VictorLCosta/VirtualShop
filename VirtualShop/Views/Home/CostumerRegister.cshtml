@@ -20,49 +20,60 @@
                             <h4 class="card-title mt-2">Cadastre-se</h4>
                         </header>
                         <article class="card-body">
+                        @if (TempData["MSG_S"] != null) 
+                        { 
+                            <p class="alert alert-success">@TempData["MSG_S"]</p>
+                        }
                             <form>
                                 <div class="form-row">
                                     <div class="col form-group">
                                         <label asp-for="Name">Nome</label>
-                                        <input type="text" asp-for="Name" class="form-control" placeholder="Primeiro nome">
+                                        <input type="text" asp-for="Name" class="form-control" placeholder="Nome completo">
+                                        <span style="color: red" asp-validation-for="Name" ></span>
                                     </div> <!-- form-group end.// -->
                                     <div class="col form-group">
                                         <label asp-for="BirthDate">Data de Nascimento</label>
                                         <input type="date" asp-for="BirthDate" class="form-control" placeholder="">
+                                        <span style="color: red" asp-validation-for="BirthDate"></span>
                                     </div> <!-- form-group end.// -->
                                 </div> <!-- form-row end.// -->
                                 <div class="form-group">
                                     <label class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" value="option1">
+                                        <input class="form-check-input" asp-for="Gender" type="radio" name="gender" value="M">
                                         <span class="form-check-label"> Masculino </span>
                                     </label>
                                     <label class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" value="option2">
+                                        <input class="form-check-input" asp-for="Gender" type="radio" name="gender" value="F">
                                         <span class="form-check-label"> Feminino</span>
                                     </label>
+                                    <span style="color: red" style="color: red" asp-validation-for="Gender"></span>
                                 </div> <!-- form-group end.// -->
                                 <div class="form-group">
                                     <label asp-for="CPF">CPF</label>
                                     <input type="text" asp-for="CPF" class="form-control" placeholder="000.000.000-00" />
+                                    <span style="color: red" asp-validation-for="CPF"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Email">Email</label>
                                     <input type="email" asp-for="Email" class="form-control" placeholder="" />
+                                    <span style="color: red" asp-validation-for="Email"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Telephone">Telefone</label>
-                                    <input type="text" asp-for="Telephone" class="form-control" placeholder="">
+                                    <input type="text" asp-for="Telephone" class="form-control" placeholder=""/>
+                                    <span style="color: red" asp-validation-for="Telephone"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Password">Senha</label>
-                                    <input class="form-control" asp-for="Password" type="password">
+                                    <input class="form-control" asp-for="Password" type="password"/>
+                                    <span style="color: red" asp-validation-for="Password"></span>
                                 </div> <!-- form-group end.// -->
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block"> Cadastrar </button>
                                 </div> <!-- form-group// -->
                                 <small class="text-muted">
                                     Clicando no botão 'Cadastrar', você confirma
-                                    que aceita nossos <br> Terms of use and Privacy Policy.
+                                    que aceita nossos <br> Termos de uso e Política de Privacidade.
                                 </small>
                             </form>
                         </article> <!-- card-body end .// -->

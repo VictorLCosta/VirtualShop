@@ -24,7 +24,32 @@ namespace VirtualShop.Database
                 .Property(c => c.CPF)
                 .IsRequired();
 
+            mb.Entity<Client>()
+                .Property(c => c.Email)
+                .IsRequired();
 
+            mb.Entity<Client>()
+                .Property(c => c.Name)
+                .IsRequired();
+
+            mb.Entity<Client>()
+                .Property(c => c.Gender)
+                .HasMaxLength(1);
+
+            mb.Entity<Client>()
+                .Property(c => c.Telephone)
+                .IsRequired();
+
+            mb.Entity<Client>()
+                .Property(c => c.BirthDate)
+                .IsRequired();
+
+            mb.Entity<Client>()
+                .Property(c => c.Password)
+                .IsRequired();
+
+            mb.Entity<Client>()
+                .HasIndex(c => c.Name);
 
             // PROPRIEDADES DA NEWSLETTER ---------------------
             mb.Entity<NewsletterEmail>()

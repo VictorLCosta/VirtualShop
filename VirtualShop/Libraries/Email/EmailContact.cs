@@ -29,7 +29,7 @@ namespace VirtualShop.Libraries.Email
             MailMessage message = new MailMessage();
 
             message.From = new MailAddress("sandmanfunky@gmail.com"); //configura o email que enviará
-            message.To.Add("sandmanfunky@gmail.com"); //destinatário
+            message.To.Add(contact.Email); //destinatário
             message.Subject = $"Contato - Loja Virtual - Email: {contact.Email}"; //assunto do email
             message.Body = Bodymsg; //msg do corpo
             message.IsBodyHtml = true; //especifica que o email é do tipo html

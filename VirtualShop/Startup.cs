@@ -34,8 +34,10 @@ namespace VirtualShop
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddSession(options => {
+                options.Cookie.IsEssential = true;});
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider();
 
             string connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=virtualshopappdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<VirtualShopContext>(options => options.UseSqlServer
@@ -60,9 +62,10 @@ namespace VirtualShop
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSession();
 
             // https://www.company.com/Produto/Visualizar/10
-            
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
