@@ -6,7 +6,7 @@
 @using (Html.BeginForm("CostumerRegister", "Home", FormMethod.Post))
 {
 <main role="main">
-
+    
     <section class="container" style="margin-top: 50px">
         <div class="row">
             <aside class="col-sm-6">
@@ -46,7 +46,7 @@
                                         <input class="form-check-input" asp-for="Gender" type="radio" name="gender" value="F">
                                         <span class="form-check-label"> Feminino</span>
                                     </label>
-                                    <span style="color: red" style="color: red" asp-validation-for="Gender"></span>
+                                    <span style="color: red" asp-validation-for="Gender"></span>
                                 </div> <!-- form-group end.// -->
                                 <div class="form-group">
                                     <label asp-for="CPF">CPF</label>
