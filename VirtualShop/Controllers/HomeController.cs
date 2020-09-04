@@ -6,17 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using VirtualShop.Repositories;
+using VirtualShop.Repositories.Contracts;
 
 namespace VirtualShop.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IClientRepository _clientRepository;
+        private readonly INewsletterRepository _newsletterRepository;
 
-        public HomeController(IClientRepository repository)
+        public HomeController(IClientRepository repository, INewsletterRepository newsletterRepository)
         {
             _clientRepository = repository;
+            _newsletterRepository = newsletterRepository;
         }
 
         [HttpGet]
@@ -30,11 +32,11 @@ namespace VirtualShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                /*
-                await _context.NewsletterEmails.AddAsync(news);
-                await _context.SaveChangesAsync();
+
+                await _newsletterRepository.InsertAsync(news);
+              
                 TempData["MSG_S"] = "E-mail cadastrado! Agora você vai receber promoções especiais no seu email! Fique atento";
-                */
+                
                 return RedirectToAction(nameof(Index));
                 
             }

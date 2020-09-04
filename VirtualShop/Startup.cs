@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using VirtualShop.Database;
 using VirtualShop.Repositories;
+using VirtualShop.Repositories.Contracts;
 
 namespace VirtualShop
 {
@@ -29,6 +30,8 @@ namespace VirtualShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<INewsletterRepository, NewsletterRepository>();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

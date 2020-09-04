@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using VirtualShop.Models;
 
-namespace VirtualShop.Repositories
+namespace VirtualShop.Repositories.Contracts
 {
     public interface IClientRepository
     {
@@ -13,6 +13,6 @@ namespace VirtualShop.Repositories
         Task UpdateAsync(Client client);
         Task DeleteAsync(int id);
         Task<Client> FindClientAsync(int id);
-        Task<List<Client>> FindAllClientsAsync();
+        Task<IEnumerable<Client>> FindAllClientsAsync();
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VirtualShop.Models;
 using VirtualShop.Database;
+using VirtualShop.Repositories.Contracts;
 
 namespace VirtualShop.Repositories
 {
@@ -25,7 +26,7 @@ namespace VirtualShop.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Client>> FindAllClientsAsync()
+        public async Task<IEnumerable<Client>> FindAllClientsAsync()
         {
             return await _context.Clients.ToListAsync();
         }
