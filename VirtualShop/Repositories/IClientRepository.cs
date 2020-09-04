@@ -4,7 +4,7 @@ using VirtualShop.Models;
 
 namespace VirtualShop.Repositories
 {
-    interface IClientRepository
+    public interface IClientRepository
     {
         Task<Client> Login(string email, string password);
 

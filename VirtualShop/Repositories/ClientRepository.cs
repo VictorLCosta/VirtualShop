@@ -35,9 +35,10 @@ namespace VirtualShop.Repositories
             return await _context.Clients.FindAsync(id);
         }
 
-        public Task IncludeAsync(Client client)
+        public async Task IncludeAsync(Client client)
         {
-            throw new NotImplementedException();
+            await _context.Clients.AddAsync(client);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Client> Login(string email, string password)

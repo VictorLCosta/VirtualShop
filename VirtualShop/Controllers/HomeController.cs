@@ -6,17 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using VirtualShop.Database;
+using VirtualShop.Repositories;
 
 namespace VirtualShop.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly VirtualShopContext _context;
+        private readonly IClientRepository _clientRepository;
 
-        public HomeController(VirtualShopContext context)
+        public HomeController(IClientRepository repository)
         {
-            _context = context;
+            _clientRepository = repository;
         }
 
         [HttpGet]
@@ -30,11 +30,13 @@ namespace VirtualShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                /*
                 await _context.NewsletterEmails.AddAsync(news);
                 await _context.SaveChangesAsync();
                 TempData["MSG_S"] = "E-mail cadastrado! Agora você vai receber promoções especiais no seu email! Fique atento";
-
+                */
                 return RedirectToAction(nameof(Index));
+                
             }
             else
             {
@@ -105,11 +107,10 @@ namespace VirtualShop.Controllers
         {
             if (ModelState.IsValid) 
             {
-                await _context.Clients.AddAsync(client);
-                await _context.SaveChangesAsync();
+                await _clientRepository.IncludeAsync(client);
 
                 TempData["MSG_S"] = "Cadastro realizado com sucesso!";
-
+                
                 return RedirectToAction(nameof(CostumerRegister));
             }
             return View();
