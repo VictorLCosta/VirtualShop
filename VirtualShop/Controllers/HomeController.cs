@@ -91,10 +91,28 @@ namespace VirtualShop.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Login()
         {
           //TODO: Implement Realistic Implementation
           return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login([FromForm] Client client) 
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Painel() 
+        {
+            if (HttpContext.Session.TryGetValue()) 
+            {
+                
+            }
+
+            return View();
         }
 
         [HttpGet]

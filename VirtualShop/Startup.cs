@@ -39,6 +39,8 @@ namespace VirtualShop
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMemoryCache();
+
             services.AddSession(options => {
                 options.Cookie.IsEssential = true;});
 
