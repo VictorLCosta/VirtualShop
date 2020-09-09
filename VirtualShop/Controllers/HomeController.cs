@@ -1,6 +1,7 @@
 using VirtualShop.Libraries.Email;
 using VirtualShop.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,15 +102,27 @@ namespace VirtualShop.Controllers
         [HttpPost]
         public IActionResult Login([FromForm] Client client) 
         {
-            return View();
+            if (client.Email == "victorlc2019@outlook.com" && client.Password == "Icaronon9") 
+            {
+                HttpContext.Session.Set("Id", new byte[] { 52 });
+                HttpContext.Session.SetString("Email", client.Email);
+                HttpContext.Session.SetInt32("Idade", 25);
+
+                return new ContentResult() { Content = "Logado!" };
+            }
+            else 
+            {
+                return new ContentResult() { Content = "Não logado!" };
+            }
         }
 
         [HttpGet]
         public IActionResult Painel() 
         {
-            if (HttpContext.Session.TryGetValue()) 
+            byte[] UsuarioId; 
+            if (HttpContext.Session.TryGetValue("ID", out UsuarioId)) 
             {
-                
+                return new ContentResult() { Content = "Usuário " + UsuarioId[0] + " Logado!" };
             }
 
             return View();

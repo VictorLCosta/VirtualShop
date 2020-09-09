@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using VirtualShop.Database;
 using VirtualShop.Repositories;
 using VirtualShop.Repositories.Contracts;
+using VirtualShop.Libraries.Session;
 
 namespace VirtualShop
 {
@@ -29,6 +30,7 @@ namespace VirtualShop
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
 
@@ -43,6 +45,8 @@ namespace VirtualShop
 
             services.AddSession(options => {
                 options.Cookie.IsEssential = true;});
+
+            services.AddScoped<Session>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider();
 
