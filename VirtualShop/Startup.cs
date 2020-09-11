@@ -15,6 +15,7 @@ using VirtualShop.Database;
 using VirtualShop.Repositories;
 using VirtualShop.Repositories.Contracts;
 using VirtualShop.Libraries.Session;
+using VirtualShop.Libraries.Login;
 
 namespace VirtualShop
 {
@@ -46,7 +47,9 @@ namespace VirtualShop
             services.AddSession(options => {
                 options.Cookie.IsEssential = true;});
 
+            //Sessions
             services.AddScoped<Session>();
+            services.AddScoped<LoginClient>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider();
 

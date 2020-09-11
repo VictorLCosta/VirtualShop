@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VirtualShop.Repositories.Contracts;
+using VirtualShop.Libraries.Login;
 
 namespace VirtualShop.Controllers
 {
@@ -15,11 +16,13 @@ namespace VirtualShop.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly INewsletterRepository _newsletterRepository;
+        private LoginClient _loginClient;
 
-        public HomeController(IClientRepository repository, INewsletterRepository newsletterRepository)
+        public HomeController(IClientRepository repository, INewsletterRepository newsletterRepository, LoginClient loginClient)
         {
             _clientRepository = repository;
             _newsletterRepository = newsletterRepository;
+            _loginClient = loginClient;
         }
 
         [HttpGet]
@@ -100,29 +103,30 @@ namespace VirtualShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromForm] Client client) 
+        public async Task<IActionResult> Login([FromForm] Client client) 
         {
-            if (client.Email == "victorlc2019@outlook.com" && client.Password == "Icaronon9") 
-            {
-                HttpContext.Session.Set("Id", new byte[] { 52 });
-                HttpContext.Session.SetString("Email", client.Email);
-                HttpContext.Session.SetInt32("Idade", 25);
+            Client clientDb = await _clientRepository.Login(client.Email, client.Password);
 
-                return new ContentResult() { Content = "Logado!" };
+            if (clientDb != null) 
+            {
+                _loginClient.Login(clientDb);
+
+                return RedirectToAction(nameof(Painel));
             }
             else 
             {
-                return new ContentResult() { Content = "Não logado!" };
+                ViewData["MSG_E"] = "Usuário não encontrado!";
+                return View();
             }
         }
 
         [HttpGet]
         public IActionResult Painel() 
         {
-            byte[] UsuarioId; 
-            if (HttpContext.Session.TryGetValue("ID", out UsuarioId)) 
+            Client client = _loginClient.GetClient(); 
+            if (client != null) 
             {
-                return new ContentResult() { Content = "Usuário " + UsuarioId[0] + " Logado!" };
+                return new ContentResult() { Content = $"Usuário {client.Id}. Email: {client.Email} - Idade: {client.BirthDate} Logado!" };
             }
 
             return View();
