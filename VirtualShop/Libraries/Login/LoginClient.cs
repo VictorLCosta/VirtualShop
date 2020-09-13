@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VirtualShop.Libraries.Session;
-using VirtualShop.Models;
+﻿using VirtualShop.Models;
 using Newtonsoft.Json;
 
 namespace VirtualShop.Libraries.Login

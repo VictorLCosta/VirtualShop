@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using VirtualShop.Repositories.Contracts;
+using VirtualShop.Libraries.Filter;
 using VirtualShop.Libraries.Login;
 
 namespace VirtualShop.Controllers
@@ -120,16 +121,11 @@ namespace VirtualShop.Controllers
             }
         }
 
+        [ClientAuthorization]
         [HttpGet]
         public IActionResult Painel() 
         {
-            Client client = _loginClient.GetClient(); 
-            if (client != null) 
-            {
-                return new ContentResult() { Content = $"Usuário {client.Id}. Email: {client.Email} - Idade: {client.BirthDate} Logado!" };
-            }
-
-            return View();
+            return new ContentResult { Content = "Este é o painel" };
         }
 
         [HttpGet]
