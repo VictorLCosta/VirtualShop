@@ -34,6 +34,7 @@ namespace VirtualShop
             services.AddHttpContextAccessor();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
+            services.AddScoped<ICollaboratorRepository, CollaboratorRepository>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

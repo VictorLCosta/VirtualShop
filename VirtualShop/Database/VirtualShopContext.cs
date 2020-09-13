@@ -13,6 +13,7 @@ namespace VirtualShop.Database
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<NewsletterEmail> NewsletterEmails { get; set; }
+        public DbSet<Collaborator> Colaborators { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -58,7 +59,12 @@ namespace VirtualShop.Database
             mb.Entity<NewsletterEmail>()
                 .HasIndex(nw => nw.Email)
                 .IsUnique();
-                
+
+            // PROPRIEDADES DO COLABORADOR
+            mb.Entity<Collaborator>()
+                .HasKey(c => c.Id);
+
+            
         }
     }
 }
