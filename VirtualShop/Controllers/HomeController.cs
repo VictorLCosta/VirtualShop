@@ -99,8 +99,7 @@ namespace VirtualShop.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-          //TODO: Implement Realistic Implementation
-          return View();
+            return View();
         }
 
         [HttpPost]
