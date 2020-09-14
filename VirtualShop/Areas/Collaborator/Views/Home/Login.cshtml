@@ -1,0 +1,44 @@
+﻿@model VirtualShop.Models.Collaborator
+@{ 
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main role="main">
+    <br />
+    <br />
+    <section class="container">
+        <aside class="col-sm-6">
+            <h3 class="subtitle-doc">
+                Login do Colaborador
+            </h3>
+            <div id="code_login_1">
+                <div class="card">
+                    <article class="card-body">
+                        @if (ViewData["MSG_E"] != null)
+                        {
+                            <p class="alert alert-danger">@Html.Raw(ViewData["MSG_E"])</p>
+                        }
+                        <h4 class="card-title mb-4 mt-1">Entrar</h4>
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <label asp-for="Email">Seu email</label>
+                                <input asp-for="Email" class="form-control" placeholder="Email" type="email">
+                            </div>
+                            <div class="form-group">
+                                <a class="float-right" href="#">Esqueceu sua senha?</a>
+                                <label asp-for="Password">Senha</label>
+                                <input asp-for="Password" class="form-control" placeholder="******" type="password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block"> Acessar </button>
+                            </div>
+                        }
+                    </article>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+</main>
