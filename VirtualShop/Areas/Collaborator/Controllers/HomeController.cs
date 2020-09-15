@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VirtualShop.Repositories.Contracts;
+using VirtualShop.Libraries.Filter;
 using VirtualShop.Libraries.Login;
 
 namespace VirtualShop.Areas.Collaborator.Controllers
@@ -44,6 +45,12 @@ namespace VirtualShop.Areas.Collaborator.Controllers
             }
         }
 
+        public IActionResult Logout() 
+        {
+            _collaboratorLogin.Logout();
+            return RedirectToAction("Login", "Home");
+        }
+
         [HttpGet]
         public IActionResult RecoverPassword() 
         {
@@ -56,6 +63,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
             return View();
         }
 
+        [CollaboratorAuthorization]
         public IActionResult Painel()
         {
             return View();
