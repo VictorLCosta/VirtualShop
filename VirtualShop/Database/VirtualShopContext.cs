@@ -60,11 +60,9 @@ namespace VirtualShop.Database
                 .HasIndex(nw => nw.Email)
                 .IsUnique();
 
-            // PROPRIEDADES DO COLABORADOR
+            // PROPRIEDADES DO COLABORADOR --------------------
             mb.Entity<Collaborator>()
-                .HasKey(c => c.Id);
-
-            
+                .HasKey(c => c.Id);            
         }
     }
 }
