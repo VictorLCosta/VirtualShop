@@ -14,6 +14,7 @@ namespace VirtualShop.Database
         public DbSet<Client> Clients { get; set; }
         public DbSet<NewsletterEmail> NewsletterEmails { get; set; }
         public DbSet<Collaborator> Colaborators { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -62,7 +63,11 @@ namespace VirtualShop.Database
 
             // PROPRIEDADES DO COLABORADOR --------------------
             mb.Entity<Collaborator>()
-                .HasKey(c => c.Id);            
+                .HasKey(c => c.Id);
+
+            /*mb.Entity<Category>()
+                .HasOne(c => c.CategoryFather)
+                .WithOne(c => c.C);*/
         }
     }
 }
