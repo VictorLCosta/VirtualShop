@@ -1,0 +1,12 @@
+﻿@model X.PagedList.IPagedList<VirtualShop.Models.Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+@foreach (Category category in Model) 
+{
+    @category.Name<br/>
+}
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("index", new { page }))

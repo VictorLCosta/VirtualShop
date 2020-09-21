@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VirtualShop.Models;
+using X.PagedList;
 
 namespace VirtualShop.Repositories.Contracts
 {
@@ -11,6 +12,6 @@ namespace VirtualShop.Repositories.Contracts
         Task<Category> FindCategoryAsync(int id);
         Task UpdateAsync(Category category);
         Task DeleteAsync(int id);
-        Task<IEnumerable<Category>> FindAllCategoriesAsync();
+        Task<IPagedList<Category>> FindAllCategoriesAsync(int? id);
     }
 }

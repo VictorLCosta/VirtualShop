@@ -6,11 +6,13 @@ using VirtualShop.Models;
 using VirtualShop.Database;
 using VirtualShop.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace VirtualShop.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
+        const int _registerPerPage = 20;
         private readonly VirtualShopContext _context;
 
         public CategoryRepository(VirtualShopContext context)
@@ -31,9 +33,10 @@ namespace VirtualShop.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Category>> FindAllCategoriesAsync()
+        public async Task<IPagedList<Category>> FindAllCategoriesAsync(int? id)
         {
-            return await _context.Categories.ToListAsync();
+            int numPage = id ?? 1;
+            return await _context.Categories.ToPagedListAsync<Category>(numPage, _registerPerPage);
         }
 
         public async Task<Category> FindCategoryAsync(int id)
