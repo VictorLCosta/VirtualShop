@@ -19,7 +19,9 @@
     </div>
     <div class="form-group">
         <label asp-for="FatherCategoryId">Categoria Pai</label>
-        <input asp-for="FatherCategoryId" class="form-control" placeholder="Digite o ID da categoria pai" />
+        <select asp-for="FatherCategoryId" asp-items="ViewBag.Categories" class="form-control">
+            <option value="">Selecione</option>
+        </select>
         <span asp-validation-for="FatherCategoryId" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Registrar</button>

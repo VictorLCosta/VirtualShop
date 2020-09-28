@@ -8,6 +8,7 @@ using VirtualShop.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using VirtualShop.Libraries.Filter;
 using X.PagedList;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace VirtualShop.Areas.Collaborator.Controllers
 {
@@ -32,6 +33,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.Categories =  _repository.FindAllCategoriesAsync().Select(a=> new SelectListItem(a.Name, a.Id.ToString()));
             return View();
         }
 
@@ -45,6 +47,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
                 TempData["MSG_S"] = "Registro salvo com sucesso";
                 return RedirectToAction(nameof(Index));
             }
+
             return View();
         }
 
