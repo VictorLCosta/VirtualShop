@@ -36,7 +36,7 @@ namespace VirtualShop.Repositories
         public async Task<IPagedList<Category>> FindAllCategoriesAsync(int? id)
         {
             int numPage = id ?? 1;
-            return await _context.Categories.ToPagedListAsync<Category>(numPage, _registerPerPage);
+            return await _context.Categories.Include(c => c.CategoryFather).ToPagedListAsync<Category>(numPage, _registerPerPage);
         }
 
         public async Task<Category> FindCategoryAsync(int id)

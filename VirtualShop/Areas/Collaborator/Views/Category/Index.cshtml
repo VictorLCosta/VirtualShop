@@ -12,7 +12,7 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Categoria</th>
+                <th scope="col">Categoria Pai</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -22,7 +22,11 @@
                 <tr>
                     <th scope="row">@category.Id</th>
                     <td>@category.Name</td>
-                    <td>@category.FatherCategoryId</td>
+                    <td>
+                        @Html.DisplayFor(model => category.CategoryFather.Id)
+                        -
+                        @Html.DisplayFor(model => category.CategoryFather.Name)
+                    </td>
                     <td>
                         <a asp-action="Update" asp-route-id="@category.Id" class="btn btn-secondary">Atualizar</a>
                         <a asp-action="Delete" asp-route-id="@category.Id" class="btn btn-danger">Deletar</a>
