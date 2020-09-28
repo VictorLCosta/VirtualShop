@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VirtualShop.Models;
-using VirtualShop.Repositories;
+using VirtualShop.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using VirtualShop.Libraries.Filter;
 using X.PagedList;
@@ -12,19 +12,19 @@ using X.PagedList;
 namespace VirtualShop.Areas.Collaborator.Controllers
 {
     [Area("Collaborator")]
-    
     public class CategoryController : Controller
     {
-        private CategoryRepository _repository;
+        private ICategoryRepository _repository;
 
-        public CategoryController(CategoryRepository repository)
+        public CategoryController(ICategoryRepository repository)
         {
             _repository = repository;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(int? page)
         {
-            var categories = await _repository.FindAllCategoriesAsync(page);
+            IPagedList<Category> categories = await _repository.FindAllCategoriesAsync(page);
 
             return View(categories);
         }

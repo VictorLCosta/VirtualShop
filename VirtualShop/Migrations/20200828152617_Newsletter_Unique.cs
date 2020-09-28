@@ -14,10 +14,6 @@ namespace VirtualShop.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NewsletterEmails", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
