@@ -1,0 +1,26 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Registrar Categoria</h1>
+
+@using (Html.BeginForm("Register", "Category", FormMethod.Post))
+{
+    <div class="form-group">
+        <label asp-for="Name">Nome</label>
+        <input asp-for="Name" class="form-control" placeholder="Insira o nome da categoria" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Slug">Slug</label>
+        <input asp-for="Slug" class="form-control" placeholder="Insira o slug da categoria" />
+        <span asp-validation-for="Slug" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FatherCategoryId">Categoria Pai</label>
+        <input asp-for="FatherCategoryId" class="form-control" placeholder="Digite o ID da categoria pai" />
+        <span asp-validation-for="FatherCategoryId" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+}

@@ -36,8 +36,15 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromForm]Category category)
+        public async Task<IActionResult> Register([FromForm]Category category)
         {
+            if (ModelState.IsValid)
+            {
+                await _repository.CreateAsync(category);
+
+                TempData["MSG_S"] = "Registro salvo com sucesso";
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 
@@ -48,7 +55,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update([FromForm]Category category)
+        public async Task<IActionResult> Update([FromForm]Category category)
         {
             return View();
         }

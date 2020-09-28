@@ -1,9 +1,16 @@
-﻿@model X.PagedList.IPagedList<VirtualShop.Models.Category>
+﻿@model IPagedList<VirtualShop.Models.Category>
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+<a class="btn btn-primary" asp-action="Register" asp-controller="Category">Cadastrar</a><br /><br />
+
+@if (TempData["MSG_S"] != null) 
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
 @if (Model.Count > 0)
 {
 <div class="table-responsive">
@@ -37,7 +44,7 @@
     </table>
 </div>
 
-@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("index", new { page }))
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 
 }
 else 
