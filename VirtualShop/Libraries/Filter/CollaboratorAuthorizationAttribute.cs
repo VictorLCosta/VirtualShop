@@ -14,12 +14,12 @@ namespace VirtualShop.Libraries.Filter
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            CollaboratorLogin collaboratorLogin = (CollaboratorLogin)context.HttpContext.RequestServices.GetService(typeof(CollaboratorLogin));
+            collaboratorLogin = (CollaboratorLogin)context.HttpContext.RequestServices.GetService(typeof(CollaboratorLogin));
             Models.Collaborator collaborator = collaboratorLogin.GetCollaborator();
 
             if(collaborator == null)
             {
-                context.Result = new ContentResult { Content = "Acesso negado!" };
+                context.Result = new RedirectToActionResult("Login", "Home", null);
             }
         }
     }

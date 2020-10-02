@@ -26,9 +26,16 @@ namespace VirtualShop.Libraries.Login
 
         public Collaborator GetCollaborator()
         {
-            string collaboratorJson = _session.Read(Key);
+            if (_session.Exists(Key))
+            {
+                string collaboratorJson = _session.Read(Key);
 
-            return JsonConvert.DeserializeObject<Collaborator>(collaboratorJson);
+                return JsonConvert.DeserializeObject<Collaborator>(collaboratorJson);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Logout()

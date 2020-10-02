@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace VirtualShop.Areas.Collaborator.Controllers
 {
     [Area("Collaborator")]
+    [CollaboratorAuthorization]
     public class CategoryController : Controller
     {
         private ICategoryRepository _repository;

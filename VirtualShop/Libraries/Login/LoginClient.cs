@@ -22,9 +22,16 @@ namespace VirtualShop.Libraries.Login
 
         public Client GetClient() 
         {
-            string clientJson = _session.Read(Key);
-            
-            return JsonConvert.DeserializeObject<Client>(clientJson);
+            if (_session.Exists(Key))
+            {
+                string clientJson = _session.Read(Key);
+
+                return JsonConvert.DeserializeObject<Client>(clientJson);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public void Logout()
