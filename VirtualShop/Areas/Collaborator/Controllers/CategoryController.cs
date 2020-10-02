@@ -52,14 +52,27 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public async Task<IActionResult> Update(int id)
         {
-            return View();
+            Category category = await _repository.FindCategoryAsync(id);
+
+            ViewBag.Categories = _repository.FindAllCategoriesAsync().Where(a => a.Id != id).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
+            return View(category);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update([FromForm]Category category)
+        public async Task<IActionResult> Update([FromForm]Category category, int id)
         {
+            if (ModelState.IsValid)
+            {
+                await _repository.UpdateAsync(category);
+
+                TempData["MSG_S"] = "Registro atualizado com sucesso!";
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Categories = _repository.FindAllCategoriesAsync().Where(a => a.Id != id).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
             return View();
         }
 

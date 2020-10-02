@@ -14,12 +14,13 @@ namespace VirtualShop.Models
         public string Name { get; set; }
 
         //DEFINIÇÕES DE DATA DE NASCIMENTO
-        [Required(ErrorMessage ="Preencha a data de nascimento")]
+        [Required(ErrorMessage ="Preencha a data de nascimento", AllowEmptyStrings = false)]
         [DataType(DataType.Date, ErrorMessage ="Insira uma data válida!")]
         public DateTime BirthDate { get; set; }
 
         //DEFINIÇÕES DE CPF
         [Required(ErrorMessage ="Preencha o seu CPF")]
+       //[RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "Preencha seu CPF corretamente")]
         public string CPF { get; set; }
 
         //DEFINIÇÕES DE SEXO
