@@ -17,9 +17,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Id</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
                 <th scope="col">Nome</th>
-                <th scope="col">Categoria Pai</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().FatherCategoryId)</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
