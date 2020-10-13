@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VirtualShop.Models;
+using X.PagedList;
 
 namespace VirtualShop.Repositories.Contracts
 {
@@ -16,5 +17,6 @@ namespace VirtualShop.Repositories.Contracts
 
         // Outras operações
         Task<IEnumerable<Collaborator>> FindAllAsync();
+        Task<IPagedList<Collaborator>> FindAllCollaborators(int? page);
     }
 }

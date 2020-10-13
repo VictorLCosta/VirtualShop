@@ -6,16 +6,20 @@ using Microsoft.EntityFrameworkCore;
 using VirtualShop.Models;
 using VirtualShop.Database;
 using VirtualShop.Repositories.Contracts;
+using X.PagedList;
+using Microsoft.Extensions.Configuration;
 
 namespace VirtualShop.Repositories
 {
     public class CollaboratorRepository : ICollaboratorRepository
     {
         private readonly VirtualShopContext _context;
+        private IConfiguration _conf;
 
-        public CollaboratorRepository(VirtualShopContext context)
+        public CollaboratorRepository(VirtualShopContext context, IConfiguration configuration)
         {
             _context = context;
+            _conf = configuration;
         }
 
 
@@ -35,6 +39,12 @@ namespace VirtualShop.Repositories
         public async Task<IEnumerable<Collaborator>> FindAllAsync()
         {
             return await _context.Colaborators.ToListAsync();
+        }
+
+        public async Task<IPagedList<Collaborator>> FindAllCollaborators(int? page)
+        {
+            int numPage = page ?? 1;
+            return await _context.Colaborators.ToPagedListAsync<Collaborator>(numPage, _conf.GetValue<int>("registerPerPage"));
         }
 
         public async Task<Collaborator> FindAsync(int id)
