@@ -1,0 +1,31 @@
+@model Collaborator
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Registrar Colaborador</h1>
+
+@using (Html.BeginForm("Register", "Collaborator", FormMethod.Post))
+{
+    <div class="form-group">
+        <label asp-for="Name">Nome</label>
+        <input asp-for="Name" class="form-control" placeholder="Insira o nome do colaborador" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" placeholder="Insira o email do colaborador" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Email</label>
+        <input asp-for="Password" class="form-control" placeholder="Insira a senha" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PasswordConfirm">Email</label>
+        <input asp-for="PasswordConfirm" class="form-control" placeholder="Confirme a senha" type="password"/>
+        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+}

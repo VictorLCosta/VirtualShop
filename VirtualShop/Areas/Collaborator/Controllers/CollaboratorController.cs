@@ -32,8 +32,16 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register([FromForm]Models.Collaborator collaborator)
+        public async Task<IActionResult> Register([FromForm]Models.Collaborator collaborator)
         {
+            if(ModelState.IsValid)
+            {
+                await _repository.CreateAsync(collaborator);
+
+                TempData["MSG_S"] = "Cadastro realizado com sucesso!";
+
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
 

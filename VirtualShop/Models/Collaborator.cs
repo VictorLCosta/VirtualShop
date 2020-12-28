@@ -27,6 +27,7 @@ namespace VirtualShop.Models
         public string Password { get; set; }
 
         [NotMapped]
+        [Compare(nameof(Password), ErrorMessage = "A senha não confere com a informada")]
         public string PasswordConfirm { get; set; }
 
         /*
