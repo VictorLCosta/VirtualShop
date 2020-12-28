@@ -36,12 +36,7 @@ namespace VirtualShop.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Collaborator>> FindAllAsync()
-        {
-            return await _context.Colaborators.ToListAsync();
-        }
-
-        public async Task<IPagedList<Collaborator>> FindAllCollaborators(int? page)
+        public async Task<IPagedList<Collaborator>> FindAllCollaboratorsAsync(int? page)
         {
             int numPage = page ?? 1;
             return await _context.Colaborators.ToPagedListAsync<Collaborator>(numPage, _conf.GetValue<int>("registerPerPage"));

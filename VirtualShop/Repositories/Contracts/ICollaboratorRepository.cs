@@ -16,7 +16,6 @@ namespace VirtualShop.Repositories.Contracts
         Task DeleteAsync(int id);
 
         // Outras operações
-        Task<IEnumerable<Collaborator>> FindAllAsync();
-        Task<IPagedList<Collaborator>> FindAllCollaborators(int? page);
+        Task<IPagedList<Collaborator>> FindAllCollaboratorsAsync(int? page);
     }
 }

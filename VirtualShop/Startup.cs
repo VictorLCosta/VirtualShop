@@ -56,9 +56,8 @@ namespace VirtualShop
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddSessionStateTempDataProvider();
 
-            string connection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=virtualshopappdb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<VirtualShopContext>(options => options.UseSqlServer
-                (connection));
+                (Configuration.GetConnectionString("VirtualShopContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

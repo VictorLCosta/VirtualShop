@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using VirtualShop.Repositories.Contracts;
+using X.PagedList;
 
 namespace VirtualShop.Areas.Collaborator.Controllers
 {
+    [Area("Collaborator")]
     public class CollaboratorController : Controller
     {
         private readonly ICollaboratorRepository _repository;
@@ -16,9 +18,11 @@ namespace VirtualShop.Areas.Collaborator.Controllers
             _repository = repository;
         }
 
-        public IActionResult Index(int? page)
+        public async Task<IActionResult> Index(int? page)
         {
-            return View();
+            IPagedList<VirtualShop.Models.Collaborator> collaborators = await _repository.FindAllCollaboratorsAsync(page);
+
+            return View(collaborators);
         }
 
         [HttpGet]
