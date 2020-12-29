@@ -46,14 +46,22 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
-        public IActionResult Update()
+        public async Task<IActionResult> Update(int id)
         {
-            return View();
+            var collaborator = await _repository.FindAsync(id);
+            return View(collaborator);
         }
 
         [HttpPost]
-        public IActionResult Update([FromForm] Models.Collaborator collaborator, int id)
+        public async Task<IActionResult> Update(Models.Collaborator collaborator)
         {
+            if(ModelState.IsValid)
+            {
+                await _repository.UpdateAsync(collaborator);
+
+                return RedirectToAction(nameof(Index));
+            }
+
             return View();
         }
 
