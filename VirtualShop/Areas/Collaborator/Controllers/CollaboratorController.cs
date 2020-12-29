@@ -66,9 +66,13 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View();
+            await _repository.DeleteAsync(id);
+
+            TempData["MSG_S"] = "Registro excluído com sucesso!";
+
+            return RedirectToAction(nameof(Index));
         }
 
     }
