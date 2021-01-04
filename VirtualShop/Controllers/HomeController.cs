@@ -17,13 +17,15 @@ namespace VirtualShop.Controllers
     {
         private readonly IClientRepository _clientRepository;
         private readonly INewsletterRepository _newsletterRepository;
+        private MailSender Sender;
         private LoginClient _loginClient;
 
-        public HomeController(IClientRepository repository, INewsletterRepository newsletterRepository, LoginClient loginClient)
+        public HomeController(IClientRepository repository, INewsletterRepository newsletterRepository, LoginClient loginClient, MailSender sender)
         {
             _clientRepository = repository;
             _newsletterRepository = newsletterRepository;
             _loginClient = loginClient;
+            Sender = sender;
         }
 
         [HttpGet]
@@ -40,7 +42,7 @@ namespace VirtualShop.Controllers
 
                 await _newsletterRepository.InsertAsync(news);
               
-                TempData["MSG_S"] = "E-mail cadastrado! Agora você vai receber promoções especiais no seu email! Fique atento";
+                TempData["MSG_S"] = "E-mail cadastrado! Agora vocï¿½ vai receber promoï¿½ï¿½es especiais no seu email! Fique atento";
                 
                 return RedirectToAction(nameof(Index));
                 
@@ -67,7 +69,7 @@ namespace VirtualShop.Controllers
 
                 if(isValid == true)
                 {
-                    EmailContact.SendContactByEmail(contact);
+                    Sender.SendContactByEmail(contact);
 
                     ViewData["MSG_S"] = "Email enviado com sucesso!";
                 }
@@ -115,7 +117,7 @@ namespace VirtualShop.Controllers
             }
             else 
             {
-                ViewData["MSG_E"] = "Usuário não encontrado!";
+                ViewData["MSG_E"] = "Usuï¿½rio nï¿½o encontrado!";
                 return View();
             }
         }
@@ -124,7 +126,7 @@ namespace VirtualShop.Controllers
         [HttpGet]
         public IActionResult Painel() 
         {
-            return new ContentResult { Content = "Este é o painel" };
+            return new ContentResult { Content = "Este ï¿½ o painel" };
         }
 
         [HttpGet]

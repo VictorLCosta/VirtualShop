@@ -1,12 +1,22 @@
 using VirtualShop.Models;
 using System.Net.Mail;
 using System.Net;
+using Microsoft.Extensions.Configuration;
 
 namespace VirtualShop.Libraries.Email
 {
-    public class EmailContact
+    public class MailSender
     {
-        public static void SendContactByEmail (Contact contact)
+        private SmtpClient _client;
+        private IConfiguration Config;
+
+        public MailSender(SmtpClient client, IConfiguration configuration)
+        {
+            _client = client;
+            Config = configuration;
+        }
+
+        public void SendContactByEmail (Contact contact)
         {
             //Servidor de envio
             SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587); //configuração do servidor (pode ser do gmail, outlook e yahoo)
@@ -28,7 +38,7 @@ namespace VirtualShop.Libraries.Email
             /*Construindo a msg de envio*/
             MailMessage message = new MailMessage();
 
-            message.From = new MailAddress("sandmanfunky@gmail.com"); //configura o email que enviará
+            message.From = new MailAddress(Config.GetValue<string>("Email:UserName")); //configura o email que enviará
             message.To.Add(contact.Email); //destinatário
             message.Subject = $"Contato - Loja Virtual - Email: {contact.Email}"; //assunto do email
             message.Body = Bodymsg; //msg do corpo

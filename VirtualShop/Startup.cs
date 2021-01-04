@@ -16,6 +16,9 @@ using VirtualShop.Repositories;
 using VirtualShop.Repositories.Contracts;
 using VirtualShop.Libraries.Session;
 using VirtualShop.Libraries.Login;
+using System.Net.Mail;
+using System.Net;
+using VirtualShop.Libraries.Email;
 
 namespace VirtualShop
 {
@@ -36,6 +39,21 @@ namespace VirtualShop
             services.AddScoped<INewsletterRepository, NewsletterRepository>();
             services.AddScoped<ICollaboratorRepository, CollaboratorRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddScoped<SmtpClient>(opt => {
+                SmtpClient client = new SmtpClient()
+                {
+                    Host = Configuration.GetValue<string>("Email:ServerSMTP"),
+                    Port =  Configuration.GetValue<int>("Email:Port"),
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(Configuration.GetValue<string>("Email:UserName"), Configuration.GetValue<string>("Email:Password")),
+                    EnableSsl = true
+                };
+
+                return client;
+            });
+
+            services.AddScoped<MailSender>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {

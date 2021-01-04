@@ -34,6 +34,7 @@
                     <td>@collaborator.Email</td>
 
                     <td>
+                        <a asp-controller="Collaborator" asp-action="GeneratePassword" asp-route-id="@collaborator.Id" class="btn btn-secondary">Gerar Senha</a>
                         <a asp-controller="Collaborator" asp-action="Update" asp-route-id="@collaborator.Id" class="btn btn-secondary">Atualizar</a>
                         <a asp-controller="Collaborator" asp-action="Delete" asp-route-id="@collaborator.Id" class="btn btn-danger">Deletar</a>
                     </td>

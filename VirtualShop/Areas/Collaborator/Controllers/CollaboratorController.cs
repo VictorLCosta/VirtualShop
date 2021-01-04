@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VirtualShop.Libraries.Text;
 using VirtualShop.Repositories.Contracts;
 using X.PagedList;
 
@@ -36,12 +37,25 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         {
             if(ModelState.IsValid)
             {
+                collaborator.Type = 'C';
                 await _repository.CreateAsync(collaborator);
 
                 TempData["MSG_S"] = "Cadastro realizado com sucesso!";
 
                 return RedirectToAction(nameof(Index));
             }
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GeneratePassword(int id)
+        {
+            var collaborator = await _repository.FindAsync(id);
+            collaborator.Password = KeyGenerator.GetUniqueKey(8);
+
+            await _repository.UpdateAsync(collaborator);
+
             return View();
         }
 
