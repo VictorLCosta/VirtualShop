@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VirtualShop.Libraries.Email;
 using VirtualShop.Libraries.Text;
 using VirtualShop.Repositories.Contracts;
 using X.PagedList;
@@ -13,10 +14,12 @@ namespace VirtualShop.Areas.Collaborator.Controllers
     public class CollaboratorController : Controller
     {
         private readonly ICollaboratorRepository _repository;
+        private MailSender Sender;
 
-        public CollaboratorController(ICollaboratorRepository repository)
+        public CollaboratorController(ICollaboratorRepository repository, MailSender sender)
         {
             _repository = repository;
+            Sender = sender;
         }
 
         public async Task<IActionResult> Index(int? page)
@@ -56,7 +59,10 @@ namespace VirtualShop.Areas.Collaborator.Controllers
 
             await _repository.UpdateAsync(collaborator);
 
-            return View();
+            Sender.SendPasswordToCollaborator(collaborator);
+            TempData["MSG_S"] = "Senha enviada com sucesso!";
+
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]

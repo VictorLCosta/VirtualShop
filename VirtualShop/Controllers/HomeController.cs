@@ -93,6 +93,7 @@ namespace VirtualShop.Controllers
             return View("Contact");
         }
 
+        
         public IActionResult Contact()
         {
             return View();
@@ -117,7 +118,7 @@ namespace VirtualShop.Controllers
             }
             else 
             {
-                ViewData["MSG_E"] = "Usu�rio n�o encontrado!";
+                ViewData["MSG_E"] = "Usuário não encontrado!";
                 return View();
             }
         }
@@ -126,7 +127,7 @@ namespace VirtualShop.Controllers
         [HttpGet]
         public IActionResult Painel() 
         {
-            return new ContentResult { Content = "Este � o painel" };
+            return new ContentResult { Content = "Este é o painel" };
         }
 
         [HttpGet]
@@ -152,8 +153,8 @@ namespace VirtualShop.Controllers
 
         public IActionResult ShoppingCart()
         {
-          //TODO: Implement Realistic Implementation
-          return View();
+            //TODO: Implement Realistic Implementation
+            return View();
         }
     }
 }
