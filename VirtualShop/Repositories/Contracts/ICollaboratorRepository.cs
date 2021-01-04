@@ -16,6 +16,7 @@ namespace VirtualShop.Repositories.Contracts
         Task DeleteAsync(int id);
 
         // Outras operações
+        Task UpdatePasswordAsync(Collaborator collaborator);
         Task<IPagedList<Collaborator>> FindAllCollaboratorsAsync(int? page);
     }
 }

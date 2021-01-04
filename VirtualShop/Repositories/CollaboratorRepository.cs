@@ -56,6 +56,18 @@ namespace VirtualShop.Repositories
         public async Task UpdateAsync(Collaborator colaborator)
         {
             _context.Colaborators.Update(colaborator);
+            _context.Entry(colaborator).Property(a => a.Password).IsModified = false;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdatePasswordAsync(Collaborator collaborator)
+        {
+            _context.Update(collaborator);
+            _context.Entry(collaborator).Property(c => c.Name).IsModified = false;
+            _context.Entry(collaborator).Property(c => c.Email).IsModified = false;
+            _context.Entry(collaborator).Property(c => c.Type).IsModified = false;
+
             await _context.SaveChangesAsync();
         }
     }

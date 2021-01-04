@@ -57,7 +57,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
             var collaborator = await _repository.FindAsync(id);
             collaborator.Password = KeyGenerator.GetUniqueKey(8);
 
-            await _repository.UpdateAsync(collaborator);
+            await _repository.UpdatePasswordAsync(collaborator);
 
             Sender.SendPasswordToCollaborator(collaborator);
             TempData["MSG_S"] = "Senha enviada com sucesso!";
@@ -75,6 +75,9 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Models.Collaborator collaborator)
         {
+            ModelState.Remove("Password");
+            ModelState.Remove("PasswordConfirm");
+
             if(ModelState.IsValid)
             {
                 await _repository.UpdateAsync(collaborator);
