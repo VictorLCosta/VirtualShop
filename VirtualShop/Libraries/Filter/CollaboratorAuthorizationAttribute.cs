@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using VirtualShop.Libraries.Login;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +7,13 @@ namespace VirtualShop.Libraries.Filter
 {
     public class CollaboratorAuthorizationAttribute : Attribute, IAuthorizationFilter
     {
+        private char _collaboratorType;
+
+        public CollaboratorAuthorizationAttribute(char collaboratorType = 'C')
+        {
+            _collaboratorType = collaboratorType;
+        }
+
         CollaboratorLogin collaboratorLogin;
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -20,6 +24,13 @@ namespace VirtualShop.Libraries.Filter
             if(collaborator == null)
             {
                 context.Result = new RedirectToActionResult("Login", "Home", null);
+            }
+            else
+            {
+                if(collaborator.Type == 'C' && _collaboratorType == 'G')
+                {
+                    context.Result = new ForbidResult(); 
+                }
             }
         }
     }

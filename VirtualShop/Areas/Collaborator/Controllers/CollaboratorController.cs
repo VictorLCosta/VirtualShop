@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VirtualShop.Libraries.Email;
+using VirtualShop.Libraries.Filter;
 using VirtualShop.Libraries.Text;
 using VirtualShop.Repositories.Contracts;
 using X.PagedList;
@@ -11,6 +13,7 @@ using X.PagedList;
 namespace VirtualShop.Areas.Collaborator.Controllers
 {
     [Area("Collaborator")]
+    [CollaboratorAuthorization('G')]
     public class CollaboratorController : Controller
     {
         private readonly ICollaboratorRepository _repository;
