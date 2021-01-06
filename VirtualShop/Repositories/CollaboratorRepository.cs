@@ -36,6 +36,11 @@ namespace VirtualShop.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<List<Collaborator>> FindAllCollaboratorPerEmail(string email)
+        {
+            return await _context.Colaborators.Where(c => c.Email == email).AsNoTracking().ToListAsync();
+        }
+
         public async Task<IPagedList<Collaborator>> FindAllCollaboratorsAsync(int? page)
         {
             int numPage = page ?? 1;
@@ -45,6 +50,11 @@ namespace VirtualShop.Repositories
         public async Task<Collaborator> FindAsync(int id)
         {
             return await _context.Colaborators.FindAsync(id);
+        }
+
+        public async Task<Collaborator> FindAsync(string email)
+        {
+            return await _context.Colaborators.AsNoTracking().FirstOrDefaultAsync(c => c.Email == email);
         }
 
         public async Task<Collaborator> Login(string Email, string Senha)

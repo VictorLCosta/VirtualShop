@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VirtualShop.Libraries.Validation;
 
 namespace VirtualShop.Models
 {
@@ -19,6 +20,7 @@ namespace VirtualShop.Models
         [Display(Name = "E-mail")]
         [Required(ErrorMessage = "Informe o e-mail")]
         [EmailAddress(ErrorMessage = "Insira um e-mail válido")]
+        [UniqueCollaboratorEmail]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Informe a senha")]
