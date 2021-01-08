@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VirtualShop.Libraries.Constants; 
 using VirtualShop.Libraries.Email;
 using VirtualShop.Libraries.Filter;
 using VirtualShop.Libraries.Text;
@@ -44,7 +45,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         {
             if(ModelState.IsValid)
             {
-                collaborator.Type = 'C';
+                collaborator.Type = CollaboratorTypeConst.Common;
                 await _repository.CreateAsync(collaborator);
 
                 TempData["MSG_S"] = "Cadastro realizado com sucesso!";
@@ -56,6 +57,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
+        [ValidateHttpReferer]
         public async Task<IActionResult> GeneratePassword(int id)
         {
             var collaborator = await _repository.FindAsync(id);

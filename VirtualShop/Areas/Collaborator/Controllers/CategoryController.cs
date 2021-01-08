@@ -80,7 +80,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
+        [ValidateHttpReferer]
         public async Task<IActionResult> Delete(int id)
         {
             await _repository.DeleteAsync(id);

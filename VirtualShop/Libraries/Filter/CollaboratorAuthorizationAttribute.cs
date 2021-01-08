@@ -1,4 +1,5 @@
 ﻿using System;
+using VirtualShop.Libraries.Constants;
 using VirtualShop.Libraries.Login;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ namespace VirtualShop.Libraries.Filter
     {
         private char _collaboratorType;
 
-        public CollaboratorAuthorizationAttribute(char collaboratorType = 'C')
+        public CollaboratorAuthorizationAttribute(char collaboratorType = CollaboratorTypeConst.Common)
         {
             _collaboratorType = collaboratorType;
         }
@@ -27,7 +28,7 @@ namespace VirtualShop.Libraries.Filter
             }
             else
             {
-                if(collaborator.Type == 'C' && _collaboratorType == 'G')
+                if(collaborator.Type == 'C' && _collaboratorType == CollaboratorTypeConst.Manager)
                 {
                     context.Result = new ForbidResult(); 
                 }

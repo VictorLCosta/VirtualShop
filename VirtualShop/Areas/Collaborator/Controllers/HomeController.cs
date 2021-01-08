@@ -46,6 +46,8 @@ namespace VirtualShop.Areas.Collaborator.Controllers
             }
         }
 
+        [ValidateHttpReferer]
+        [CollaboratorAuthorization]
         public IActionResult Logout() 
         {
             _collaboratorLogin.Logout();
