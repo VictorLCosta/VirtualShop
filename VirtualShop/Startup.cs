@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using VirtualShop.Database;
 using VirtualShop.Repositories;
 using VirtualShop.Repositories.Contracts;
 using VirtualShop.Libraries.Session;
 using VirtualShop.Libraries.Login;
+using VirtualShop.Libraries.Middleware;
 using System.Net.Mail;
 using System.Net;
 using VirtualShop.Libraries.Email;
@@ -97,6 +97,7 @@ namespace VirtualShop
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
+            app.UseMiddleware<ValidateAntiForgeryTokenMiddleware>();
 
             // https://www.company.com/Produto/Visualizar/10
 
