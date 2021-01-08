@@ -35,6 +35,7 @@ namespace VirtualShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index([FromForm]NewsletterEmail news) 
         {
             if (ModelState.IsValid)
@@ -106,6 +107,7 @@ namespace VirtualShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromForm] Client client) 
         {
             Client clientDb = await _clientRepository.Login(client.Email, client.Password);
@@ -138,6 +140,7 @@ namespace VirtualShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CostumerRegister([FromForm] Client client) 
         {
             if (ModelState.IsValid) 

@@ -28,6 +28,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromForm]Models.Collaborator collaborator) 
         {
             Models.Collaborator collaboratorDb = await _collaboaratorRepository.Login(collaborator.Email, collaborator.Password);

@@ -39,6 +39,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromForm]Models.Collaborator collaborator)
         {
             if(ModelState.IsValid)
@@ -76,6 +77,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Models.Collaborator collaborator)
         {
             ModelState.Remove("Password");

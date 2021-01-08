@@ -39,6 +39,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register([FromForm]Category category)
         {
             if (ModelState.IsValid)
@@ -62,6 +63,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update([FromForm]Category category, int id)
         {
             if (ModelState.IsValid)
@@ -78,6 +80,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             await _repository.DeleteAsync(id);
