@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VirtualShop.Models
 {
@@ -8,38 +9,45 @@ namespace VirtualShop.Models
         /*PK*/
         public int Id { get; set; }
 
-        //DEFINIÇÕES DE NOME
+        //DEFINIï¿½ï¿½ES DE NOME
         [Required(ErrorMessage ="Preencha o nome")]
-        [MinLength(4, ErrorMessage ="Digite no mínimo 4 caracteres!")]
+        [MinLength(4, ErrorMessage ="Digite no mï¿½nimo 4 caracteres!")]
         public string Name { get; set; }
 
-        //DEFINIÇÕES DE DATA DE NASCIMENTO
+        //DEFINIï¿½ï¿½ES DE DATA DE NASCIMENTO
         [Required(ErrorMessage ="Preencha a data de nascimento", AllowEmptyStrings = false)]
-        [DataType(DataType.Date, ErrorMessage ="Insira uma data válida!")]
+        [DataType(DataType.Date, ErrorMessage ="Insira uma data vï¿½lida!")]
         public DateTime BirthDate { get; set; }
 
-        //DEFINIÇÕES DE CPF
+        //DEFINIï¿½ï¿½ES DE CPF
         [Required(ErrorMessage ="Preencha o seu CPF")]
        //[RegularExpression(@"^\d{3}\.\d{3}\.\d{3}-\d{2}$", ErrorMessage = "Preencha seu CPF corretamente")]
         public string CPF { get; set; }
 
-        //DEFINIÇÕES DE SEXO
+        //DEFINIï¿½ï¿½ES DE SEXO
         [Required(ErrorMessage ="Defina o seu sexo")]
         public string Gender { get; set; }
 
-        //DEFINIÇÕES DE TELEFONE
+        //DEFINIï¿½ï¿½ES DE TELEFONE
         [Required(ErrorMessage ="Insira seu telefone")]
         public string Telephone { get; set; }
 
-        //DEFINIÇÕES DE EMAIL
+        //DEFINIï¿½ï¿½ES DE EMAIL
         [Required(ErrorMessage ="Preencha com o seu email")]
-        [EmailAddress(ErrorMessage ="Informe um email válido!")]
+        [EmailAddress(ErrorMessage ="Informe um email vï¿½lido!")]
         public string Email { get; set; }
 
-        //DEFINIÇÕES DE SENHA
+        //DEFINIï¿½ï¿½ES DE SENHA
         [Required(ErrorMessage ="Informe sua senha")]
-        [MinLength(8, ErrorMessage ="Digite no mínimo 8 caracteres")]
+        [MinLength(8, ErrorMessage ="Digite no mï¿½nimo 8 caracteres")]
         public string Password { get; set; }
+
+        [NotMapped]
+        [Compare(nameof(Password), ErrorMessage = "A senha nÃ£o confere com a informada")]
+        public string PasswordConfirm { get; set; }
+
+        [Display(Name = "SituaÃ§Ã£o")]
+        public string Situation { get; set; }
 
         public Client()
         {

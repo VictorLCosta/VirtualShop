@@ -30,7 +30,7 @@ namespace VirtualShop.Libraries.Filter
             {
                 if(collaborator.Type == 'C' && _collaboratorType == CollaboratorTypeConst.Manager)
                 {
-                    context.Result = new ForbidResult(); 
+                    context.Result = new ForbidResult();
                 }
             }
         }
