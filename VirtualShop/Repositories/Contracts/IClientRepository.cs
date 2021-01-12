@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using VirtualShop.Models;
+using X.PagedList;
 
 namespace VirtualShop.Repositories.Contracts
 {
@@ -14,5 +15,7 @@ namespace VirtualShop.Repositories.Contracts
         Task DeleteAsync(int id);
         Task<Client> FindClientAsync(int id);
         Task<IEnumerable<Client>> FindAllClientsAsync();
+
+        Task<IPagedList<Client>> FindAllClientsAsync(int? page);
     }
 }

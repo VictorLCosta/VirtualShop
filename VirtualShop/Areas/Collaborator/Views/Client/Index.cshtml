@@ -1,0 +1,61 @@
+@model IPagedList<VirtualShop.Models.Client>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Colaborador</h1>
+<a asp-action="Register" asp-controller="Collaborator" class="btn btn-primary">Cadastrar</a>
+<br />
+<br />
+
+@if (TempData["MSG_S"] != null) 
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+{
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
+                <th scope="col">Nome</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Email)</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Client client in Model)
+            {
+                <tr>
+                    <th scope="row">@client.Id</th>
+                    <td>@client.Name</td>
+                    <td>@client.Email</td>
+
+                    @if(client.Situation == "A")
+                    {
+                        <a asp-controller="Client" asp-action="ActivateDesactivate" asp-route-id="@client.Id" class="btn btn-danger">Destativar</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Client" asp-action="ActivateDesactivate" asp-route-id="@client.Id" class="btn btn-success">Ativar</a>
+                    }
+
+                    <td>
+                        <a asp-controller="Client" asp-action="Update" asp-route-id="@client.Id" class="btn btn-secondary">Atualizar</a>
+                        <a asp-controller="Client" asp-action="Delete" asp-route-id="@client.Id" class="btn btn-danger">Deletar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+
+}
+else 
+{
+    <span>Nenhum registro cadastrado!</span>
+}

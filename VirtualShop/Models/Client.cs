@@ -7,6 +7,7 @@ namespace VirtualShop.Models
     public class Client
     {
         /*PK*/
+        [Display(Name = "Código")]
         public int Id { get; set; }
 
         //DEFINI��ES DE NOME
