@@ -16,6 +16,9 @@ namespace VirtualShop.Database
         public DbSet<Collaborator> Colaborators { get; set; }
         public DbSet<Category> Categories { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Image> Images { get; set; }
+
         protected override void OnModelCreating(ModelBuilder mb)
         {
             // PROPRIEDADES DE CLIENTE ------------------------
@@ -68,6 +71,17 @@ namespace VirtualShop.Database
             /*mb.Entity<Category>()
                 .HasOne(c => c.CategoryFather)
                 .WithOne(c => c.C);*/
+
+            mb.Entity<Product>(entity => 
+            {
+                entity.HasOne(x => x.Category)
+                    .WithMany(x => x.Products)
+                    .HasForeignKey(x => x.CategoryId);
+
+                entity.HasMany(x => x.Images)
+                    .WithOne(x => x.Product)
+                    .HasForeignKey(x => x.ProductId);
+            });
         }
     }
 }

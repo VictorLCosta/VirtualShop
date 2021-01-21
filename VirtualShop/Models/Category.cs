@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace VirtualShop.Models
 {
@@ -21,5 +22,7 @@ namespace VirtualShop.Models
 
         [ForeignKey(nameof(FatherCategoryId))]
         public virtual Category CategoryFather { get; set; }
+
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }
