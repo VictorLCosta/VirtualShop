@@ -42,6 +42,20 @@ namespace VirtualShop.Repositories
             return await _context.Clients.ToPagedListAsync<Client>(numPage, Config.GetValue<int>("registerPerPage"));
         }
 
+        public async Task<IPagedList<Client>> FindAllClientsAsync(int? page, string search)
+        {
+            int registerPerPage = Config.GetValue<int>("registerPerPage");
+            int numPage = page ?? 1;
+
+            var dbClient = _context.Clients.AsQueryable();
+            if(!string.IsNullOrEmpty(search))
+            {
+                dbClient = dbClient.Where(a => a.Name.Contains(search.Trim()) || a.Email.Contains(search.Trim()));
+            }
+
+            return await dbClient.ToPagedListAsync<Client>(numPage, registerPerPage);
+        }
+
         public async Task<Client> FindClientAsync(int id)
         {
             return await _context.Clients.FindAsync(id);

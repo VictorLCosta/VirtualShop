@@ -1,10 +1,24 @@
 @model IPagedList<VirtualShop.Models.Client>
 @{
     ViewData["Title"] = "Index";
+    var search = Context.Request.Query["search"];
 }
 
-<h1>Colaborador</h1>
-<a asp-action="Register" asp-controller="Collaborator" class="btn btn-primary">Cadastrar</a>
+<h1>Novo Cliente</h1>
+
+@using (Html.BeginForm("Register", "Collaborator", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="pesquisa">Nome</label>
+        <input class="form-control" name="pesquisa" value="@search" id="pesquisa" placeholder="Digite o nome ou o e-mail do cliente" />
+    </div>
+    <button type="submit" class="btn btn-primary">Ok</button>
+
+    @Html.AntiForgeryToken()
+}
+<br />
+<br />
+<a asp-action="Register" asp-controller="Client" class="btn btn-primary">Cadastrar</a>
 <br />
 <br />
 
@@ -52,7 +66,7 @@
     </table>
 </div>
 
-@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page, search = search }))
 
 }
 else 

@@ -17,5 +17,6 @@ namespace VirtualShop.Repositories.Contracts
         Task<IEnumerable<Client>> FindAllClientsAsync();
 
         Task<IPagedList<Client>> FindAllClientsAsync(int? page);
+        Task<IPagedList<Client>> FindAllClientsAsync(int? page, string search);
     }
 }

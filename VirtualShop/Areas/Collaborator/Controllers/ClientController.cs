@@ -20,9 +20,9 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(int? page)
+        public async Task<IActionResult> Index(int? page, string search)
         {
-            IPagedList<Client> clients = await _repository.FindAllClientsAsync(page);
+            IPagedList<Client> clients = await _repository.FindAllClientsAsync(page, search);
 
             return View(clients);
         }
