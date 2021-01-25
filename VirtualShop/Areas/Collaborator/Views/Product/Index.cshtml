@@ -1,0 +1,68 @@
+@model IPagedList<Product>
+@{
+    ViewData["Title"] = "Index";
+    var search = Context.Request.Query["search"];
+}
+
+<h1>Index</h1>
+@using (Html.BeginForm("Register", "Collaborator", FormMethod.Get))
+{
+    <div class="form-group">
+        <label for="pesquisa">Nome</label>
+        <input class="form-control" name="pesquisa" value="@search" id="pesquisa" placeholder="Digite o nome ou o e-mail do cliente" />
+    </div>
+    <button type="submit" class="btn btn-primary">Ok</button>
+
+    @Html.AntiForgeryToken()
+}
+<br />
+<br />
+<a asp-action="Register" asp-controller="Client" class="btn btn-primary">Cadastrar</a>
+<br />
+<br />
+
+@if (TempData["MSG_S"] != null) 
+{
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+}
+
+@if (Model.Count > 0)
+{
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Id)</th>
+                <th scope="col">Nome</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Name)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Category)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.First().Value)</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <th scope="row">@product.Id</th>
+                    <td>@product.Name</td>
+                    <td>@product.Category</td>
+                    <td>@product.Value</td>
+
+                    <td>
+                        <a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-secondary">Atualizar</a>
+                        <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Deletar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page, search = search }))
+
+}
+else 
+{
+    <span>Nenhum registro cadastrado!</span>
+}
