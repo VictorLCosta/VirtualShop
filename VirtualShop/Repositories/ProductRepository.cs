@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using VirtualShop.Database;
 using VirtualShop.Models;
@@ -41,7 +42,7 @@ namespace VirtualShop.Repositories
 
         public async Task<Product> FindAsync(int id)
         {
-            return await Context.Products.FindAsync(id);
+            return await Context.Products.Include(a => a.Images).FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<IPagedList<Product>> PageAllAsync(int? page, string search)
@@ -55,7 +56,7 @@ namespace VirtualShop.Repositories
                 dbProducts = dbProducts.Where(a => a.Name.Contains(search));
             }
 
-            return await dbProducts.ToPagedListAsync<Product>(numPage, registerPerPage);
+            return await dbProducts.Include(a => a.Images).ToPagedListAsync<Product>(numPage, registerPerPage);
         }
 
         public async Task UpdateAsync(Product product)
