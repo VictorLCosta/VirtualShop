@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VirtualShop.Models;
 using VirtualShop.Repositories.Contracts;
 
 namespace VirtualShop.Areas.Collaborator.Controllers
@@ -22,5 +23,17 @@ namespace VirtualShop.Areas.Collaborator.Controllers
             return View(paged);
         }
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody]Product product)
+        {
+            await Task.Yield();
+            return Ok();
+        }
     }
 }

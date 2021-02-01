@@ -9,6 +9,7 @@ namespace VirtualShop.Models
         public string Name { get; set; }
         public string Desc { get; set; }
         public decimal Value { get; set; }
+        public int Qty { get; set; }
 
         #region Correios
         public double Weight { get; set; }
