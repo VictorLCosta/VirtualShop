@@ -24,19 +24,19 @@
     </div>
 
     <div class="form-group">
-            <label asp-for="Desc">Descrição</label>
+            <label asp-for="Desc"></label>
             <textarea asp-for="Desc" class="form-control"></textarea>
             <span asp-validation-for="Desc" class="text-danger"></span>
     </div>
 
     <div class="row">
         <div class="form-group col-sm-6">
-            <label asp-for="Value">Valor</label>
+            <label asp-for="Value"></label>
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">R$</div>
                 </div>
-                <input asp-for="Value" class="form-control" placeholder="Insira o preço do produto" />
+                <input asp-for="Value" class="form-control money" placeholder="Insira o preço do produto" />
             </div>
             <span asp-validation-for="Value" class="text-danger"></span>
         </div>

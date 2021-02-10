@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
 namespace VirtualShop.Models
@@ -7,7 +8,11 @@ namespace VirtualShop.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Display(Name="Descrição")]
         public string Desc { get; set; }
+
+        [Display(Name="Preço")]
         public decimal Value { get; set; }
         public int Qty { get; set; }
 
@@ -18,6 +23,7 @@ namespace VirtualShop.Models
         public double Length { get; set; }
         #endregion
         
+        [Display(Name="Código da categoria")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
