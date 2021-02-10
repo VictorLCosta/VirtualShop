@@ -1,0 +1,17 @@
+.row .Imagens .btn-image-remove
+{
+    width: 100% !important;
+    margin-bottom: 30px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.Imagens div
+{
+    text-align: center;
+}
+
+.Imagens .img-thumbnail
+{
+    width: 100%;
+}

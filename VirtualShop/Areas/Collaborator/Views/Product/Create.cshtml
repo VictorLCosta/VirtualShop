@@ -7,77 +7,112 @@
 
 @using (Html.BeginForm("Create", "Product", FormMethod.Post))
 {
-    <div class="form-group">
-        <label asp-for="Name">Nome</label>
-        <input asp-for="Name" class="form-control" placeholder="Insira o nome do produto" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Desc">Descrição</label>
-        <textarea asp-for="Desc" class="form-control"></textarea>
-        <span asp-validation-for="Desc" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Value">Valor</label>
-        <div class="input-group mb-2">
-            <div class="input-group-prepend">
-                <div class="input-group-text">R$</div>
-            </div>
-            <input asp-for="Value" class="form-control" placeholder="Insira o preço do produto" />
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="CategoryId"></label>
+            <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.Categories">
+                <option value="">Selecionar</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
-        <span asp-validation-for="Value" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Qty">Quantidade</label>
-        <div class="input-group mb-2">
-            <input asp-for="Qty" class="form-control" placeholder="Digite a quantidade inicial do produto" />
-            <div class="input-group-prepend">
-                <div class="input-group-text">unid</div>
-            </div>
+
+        <div class="form-group col-md-6">
+            <label asp-for="Name">Nome</label>
+            <input asp-for="Name" class="form-control" placeholder="Insira o nome do produto" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <span asp-validation-for="Qty" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Weight">Peso</label>
-        <div class="input-group mb-2">
-            <input asp-for="Weight" class="form-control" />
-            <div class="input-group-prepend">
-                <div class="input-group-text">Kg</div>
-            </div>
-        </div>
-        <span asp-validation-for="Weight" class="text-danger"></span>
+            <label asp-for="Desc">Descrição</label>
+            <textarea asp-for="Desc" class="form-control"></textarea>
+            <span asp-validation-for="Desc" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Width">Largura</label>
-        <div class="input-group mb-2">
-            <input asp-for="Width" class="form-control" />
-            <div class="input-group-prepend">
-                <div class="input-group-text">cm</div>
+
+    <div class="row">
+        <div class="form-group col-sm-6">
+            <label asp-for="Value">Valor</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">R$</div>
+                </div>
+                <input asp-for="Value" class="form-control" placeholder="Insira o preço do produto" />
             </div>
+            <span asp-validation-for="Value" class="text-danger"></span>
         </div>
-        <span asp-validation-for="Width" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Height">Altura</label>
-        <div class="input-group mb-2">
-            <input asp-for="Height" class="form-control" />
-            <div class="input-group-prepend">
-                <div class="input-group-text">cm</div>
+        <div class="form-group col-sm-6">
+            <label asp-for="Qty">Quantidade</label>
+            <div class="input-group mb-2">
+                <input asp-for="Qty" class="form-control" placeholder="Digite a quantidade inicial do produto" />
+                <div class="input-group-prepend">
+                    <div class="input-group-text">unid</div>
+                </div>
             </div>
+            <span asp-validation-for="Qty" class="text-danger"></span>
         </div>
-        <span asp-validation-for="Height" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label asp-for="Length">Comprimento</label>
-        <div class="input-group mb-2">
-            <input asp-for="Length" class="form-control" />
-            <div class="input-group-prepend">
-                <div class="input-group-text">cm</div>
+
+    <br />
+    <h2>Frete</h2>
+    <br />
+
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label asp-for="Weight">Peso</label>
+            <div class="input-group mb-2">
+                <input asp-for="Weight" class="form-control" />
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Kg</div>
+                </div>
             </div>
+            <span asp-validation-for="Weight" class="text-danger"></span>
         </div>
-        <span asp-validation-for="Length" class="text-danger"></span>
+        <div class="form-group col-sm-3">
+            <label asp-for="Width">Largura</label>
+            <div class="input-group mb-2">
+                <input asp-for="Width" class="form-control" />
+                <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                </div>
+            </div>
+            <span asp-validation-for="Width" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-3">
+            <label asp-for="Height">Altura</label>
+            <div class="input-group mb-2">
+                <input asp-for="Height" class="form-control" />
+                <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                </div>
+            </div>
+            <span asp-validation-for="Height" class="text-danger"></span>
+        </div>
+        <div class="form-group col-sm-3">
+            <label asp-for="Length">Comprimento</label>
+            <div class="input-group mb-2">
+                <input asp-for="Length" class="form-control" />
+                <div class="input-group-prepend">
+                    <div class="input-group-text">cm</div>
+                </div>
+            </div>
+            <span asp-validation-for="Length" class="text-danger"></span>
+        </div>
     </div>
+
+    <br />
+    <hr />
+
+    <div class="row Imagens">
+        @for (int i = 0; i < 12; i++)
+        {
+            <div class="col-md-3">
+                <img src="~/img/img-padrao.png" class="img-thumbnail" />
+                <div class="btn btn-danger col-md-12 btn-image-remove" style="margin-bottom: 30px; border-top-left-radius: 0px; border-top-right-radius: 0px">X</div>
+            </div>
+        }
+    </div>
+
+
     <button type="submit" class="btn btn-primary">Registrar</button>
 
     @Html.AntiForgeryToken()

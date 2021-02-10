@@ -34,7 +34,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.Categories =  _repository.FindAllCategoriesAsync().Select(a=> new SelectListItem(a.Name, a.Id.ToString()));
+            ViewBag.Categories =  _repository.FindAllCategoriesAsync().Result.Select(a=> new SelectListItem(a.Name, a.Id.ToString()));
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         {
             Category category = await _repository.FindCategoryAsync(id);
 
-            ViewBag.Categories = _repository.FindAllCategoriesAsync().Where(a => a.Id != id).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
+            ViewBag.Categories = _repository.FindAllCategoriesAsync().Result.Where(a => a.Id != id).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
             return View(category);
         }
 
@@ -75,7 +75,7 @@ namespace VirtualShop.Areas.Collaborator.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewBag.Categories = _repository.FindAllCategoriesAsync().Where(a => a.Id != id).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
+            ViewBag.Categories = _repository.FindAllCategoriesAsync().Result.Where(a => a.Id != id).Select(a => new SelectListItem(a.Name, a.Id.ToString()));
             return View();
         }
 

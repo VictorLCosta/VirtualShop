@@ -12,7 +12,7 @@ namespace VirtualShop.Repositories.Contracts
         Task<Category> FindCategoryAsync(int id);
         Task UpdateAsync(Category category);
         Task DeleteAsync(int id);
-        IEnumerable<Category> FindAllCategoriesAsync();
+        Task<IEnumerable<Category>> FindAllCategoriesAsync();
         Task<IPagedList<Category>> FindAllCategoriesAsync(int? id);
     }
 }

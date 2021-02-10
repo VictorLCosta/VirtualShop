@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using VirtualShop.Models;
 using VirtualShop.Repositories.Contracts;
 
@@ -9,10 +11,12 @@ namespace VirtualShop.Areas.Collaborator.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository Repo;
+        private readonly ICategoryRepository CatRepo;
 
-        public ProductController(IProductRepository repository)
+        public ProductController(IProductRepository repository, ICategoryRepository catRepo)
         {
             Repo = repository;
+            CatRepo = catRepo;
         }
 
         [HttpGet]
@@ -24,8 +28,11 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var dbCategories = await CatRepo.FindAllCategoriesAsync();
+
+            ViewBag.Categories = dbCategories.Select(a => new SelectListItem(a.Name, a.Id.ToString()));
             return View();
         }
 
