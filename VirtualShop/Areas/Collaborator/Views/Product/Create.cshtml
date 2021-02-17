@@ -105,7 +105,7 @@
     <div class="row Imagens">
         @for (int i = 0; i < 12; i++)
         {
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <img src="~/img/img-padrao.png" class="img-thumbnail" />
                 <div class="btn btn-danger col-md-12 btn-image-remove" style="margin-bottom: 30px; border-top-left-radius: 0px; border-top-right-radius: 0px">X</div>
             </div>
@@ -114,6 +114,7 @@
 
 
     <button type="submit" class="btn btn-primary">Registrar</button>
+    <br />
 
     @Html.AntiForgeryToken()
 }

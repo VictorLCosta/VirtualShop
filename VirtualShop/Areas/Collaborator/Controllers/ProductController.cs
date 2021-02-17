@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using VirtualShop.Libraries.Filter;
 using VirtualShop.Models;
 using VirtualShop.Repositories.Contracts;
 
@@ -37,10 +38,51 @@ namespace VirtualShop.Areas.Collaborator.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody]Product product)
+        
+        public async Task<IActionResult> Create([FromForm]Product product)
         {
-            await Task.Yield();
-            return Ok();
+            if(ModelState.IsValid)
+            {
+                await Repo.CreateAsync(product);
+
+                TempData["MSG_S"] = "Produto cadastrado com sucesso";
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            var dbCategories = await CatRepo.FindAllCategoriesAsync();
+
+            ViewBag.Categories = dbCategories.Select(a => new SelectListItem(a.Name, a.Id.ToString()));
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var dbCategories = await Repo.FindAllAsync();
+
+            ViewBag.Categories = dbCategories.Select(a => new SelectListItem(a.Name, a.Id.ToString()));
+
+            Product product = await Repo.FindAsync(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update([FromForm]Product product)
+        {
+            if(ModelState.IsValid)
+            {
+                await Repo.UpdateAsync(product);
+
+                TempData["MSG_S"] = "Produto atualizado com sucesso";
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            var dbCategories = await Repo.FindAllAsync();
+
+            ViewBag.Categories = dbCategories.Select(a => new SelectListItem(a.Name, a.Id.ToString()));
+            return View(product);
         }
     }
 }
